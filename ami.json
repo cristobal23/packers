@@ -1,20 +1,24 @@
 {
-    "variables": {
-        "access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
-        "secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
-    },
-    "builders": [{
-        "type": "amazon-ebs",
-        "access_key": "{{user `access_key`}}",
-        "secret_key": "{{user `secret_key`}}",
-        "region": "us-east-1",
-        "source_ami": "ami-fce3c696",
-        "instance_type": "t2.micro",
-        "ssh_username": "ec2-user",
-        "ami_name": "webonobos_{{timestamp}}",        
-    }],
-    "provisioners": [{
-        "type": "shell",
-        "script": "provision.sh"
-    }]
+  "variables": {
+    "access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `access_key`}}",
+      "secret_key": "{{user `secret_key`}}",
+      "region": "us-east-1",
+      "source_ami": "ami-fce3c696",
+      "instance_type": "t2.micro",
+      "ssh_username": "ec2-user",
+      "ami_name": "webonobos"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "provision.sh"
+    }
+  ]
 }
