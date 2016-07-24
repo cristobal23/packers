@@ -1,26 +1,20 @@
 {
-	"_comment": "fuckery",
-	"variables": {
-		"access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
-		"secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
-	},
-	"builders": [{
-		"access_key": "{{user `access_key`}}",
-		"account_id": "0610-1094-6627",
-		"ami_name": "webonobos_{{timestamp}}",
-		"instance_type": "t2.micro",
-		"region": "us-east-1",
-		"s3_bucket": "packer-images",
-		"secret_key": "{{user `secret_key`}}",
-		"source_ami": "ami-fce3c696",
-		"ssh_username": "ec2-user",
-		"type": "amazon-instance",
-		"x509_cert_path": "~/.aws/cert-3OWD5HR6BZHWZVADL73VIQNODSJOOWDM.pem.txt",
-		"x509_key_path": "~/.aws/pk-3OWD5HR6BZHWZVADL73VIQNODSJOOWDM.pem.txt",
-		"x509_upload_path": "/tmp"
-	}],
-	"provisioners": [{
-		"type": "shell",
-		"script": "provision.sh"
-	}]
+    "variables": {
+        "access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+        "secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
+    },
+    "builders": [{
+        "type": "amazon-ebs",
+        "access_key": "{{user `access_key`}}",
+        "secret_key": "{{user `secret_key`}}",
+        "region": "us-east-1",
+        "source_ami": "ami-fce3c696",
+        "instance_type": "t2.micro",
+        "ssh_username": "ec2-user",
+        "ami_name": "webonobos_{{timestamp}}",        
+    }],
+    "provisioners": [{
+        "type": "shell",
+        "script": "provision.sh"
+    }]
 }
